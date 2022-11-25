@@ -1,31 +1,94 @@
 .message {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    margin-bottom: 70px;
 
 }
 
 .imageAndText {
 
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: self-end;
 }
 
 .imageAndText img {
+    width: 48px;
+    height: 48px;
+    margin-left: 25px;
 
+    position: relative;
 }
 
 .text {
+    font-family: 'Montserrat';
 
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+
+    color: white;
+    background: #0066CC;
+    padding: 8px 13px;
+    border-radius: 10px;
+
+    position: relative;
+;
 }
 
 .text:after {
-
+    content: "";
+    position: absolute;
+    bottom: 0px; right: -20px; /* Положение треугольника */
+    border: 20px solid transparent;
+    border-bottom: 20px solid #0066CC;
+    border-left: 20px solid #0066CC;
+    z-index: -1;
 }
 
 .name {
+text-align: right;
+    ont-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+
+    line-height: 22px;
+    /* identical to box height */
+
+
+    color: #FFFFFF;
 
 }
 
 .messageText {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    /* identical to box height */
 
+
+    color: #FFFFFF;
 }
 
 .time {
+    position: relative;
+    top: 15px;
+    right: 38px;
+
+
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 12px;
+
+    color: #000000;
+
+
 
 }
