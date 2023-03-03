@@ -10,9 +10,26 @@ export const homeWorkReducer = (state: UserType[], action: ActionType): UserType
             // sort() создаёт новый массив? или нужно в ручную?...
           const stateCopy = [...state]
             if(action.payload === 'up'){
-                 stateCopy.sort((a,b)=>b.age -a.age)
-            }if(action.payload === 'down'){
-                 stateCopy.sort((a,b)=>a.age -b.age)
+                 stateCopy.sort((a,b)=>{
+                     if(a.name>b.name) {
+                         return 1
+                     }else if(a.name <b.name){
+                         return -1
+                     }else {
+                      return    0
+                     }
+                 })
+            }
+            if(action.payload === 'down'){
+                stateCopy.sort((a,b)=>{
+                    if(a.name>b.name) {
+                        return -1
+                    }else if(a.name <b.name){
+                        return 1
+                    }else {
+                        return    0
+                    }
+                })
             }
             return stateCopy
             // need to fix
