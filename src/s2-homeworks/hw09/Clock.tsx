@@ -5,7 +5,7 @@ import s from './Clock.module.css'
 
 
 function Clock() {
-    const [timerId, setTimerId] = useState<number | undefined>(undefined)
+    let [timerId, setTimerId] = useState<number | undefined>(undefined)
     // for autotests // не менять // можно подсунуть в локалСторэдж нужную дату, чтоб увидеть как она отображается
     const [date, setDate] = useState<Date>(new Date(restoreState('hw9-date', Date.now())))
     const [show, setShow] = useState<boolean>(false)
@@ -13,21 +13,26 @@ function Clock() {
     const start = () => {
         // пишут студенты // запустить часы (должно отображаться реальное время, а не +1)
         // сохранить ид таймера (https://learn.javascript.ru/settimeout-setinterval#setinterval)
-        setTimerId(setInterval(()=>setDate(new Date(restoreState('hw9-date', Date.now()))),1000))
-        console.log(idInterval)
+        // setTimerId(setInterval(()=>setDate(new Date(),1000))
+        const timerInterval = (window.setInterval(function () {
+            setDate(new Date(restoreState('hw9-date', Date.now())))
+        }, 1000))
+        setTimerId(timerInterval)
 
     }
 
     const stop = () => {
         // пишут студенты // поставить часы на паузу, обнулить ид таймера (timerId <- undefined)
+        clearInterval(timerId)
+      return  setTimerId(undefined)
 
     }
-
+    console.log(timerId)
     const onMouseEnter = () => { // пишут студенты // показать дату если наведена мышка
-       return  setShow(true)
+        return setShow(true)
     }
     const onMouseLeave = () => { // пишут студенты // спрятать дату если мышка не наведена
-        return  setShow(false)
+        return setShow(false)
     }
 
 
@@ -40,10 +45,9 @@ function Clock() {
 
 
     // день недели на английском, месяц на английском (https://learn.javascript.ru/intl#intl-datetimeformat)
-     const stringDay = days[date.getDay()] || <br/> // пишут студенты
+    const stringDay = days[date.getDay()] || <br/> // пишут студенты
     const stringMonth = months[date.getMonth()] || <br/> // пишут студенты
-    console.log(stringMonth)
-    console.log(stringDate)
+
     return (
         <div className={s.clock}>
             <div
@@ -76,14 +80,14 @@ function Clock() {
             <div className={s.buttonsContainer}>
                 <SuperButton
                     id={'hw9-button-start'}
-                    disabled={false} // пишут студенты // задизэйблить если таймер запущен
+                    disabled={timerId !== undefined} // пишут студенты // задизэйблить если таймер запущен
                     onClick={start}
                 >
                     start
                 </SuperButton>
                 <SuperButton
                     id={'hw9-button-stop'}
-                    disabled={true} // пишут студенты // задизэйблить если таймер не запущен
+                    disabled={timerId === undefined } // пишут студенты // задизэйблить если таймер не запущен
                     onClick={stop}
                 >
                     stop
