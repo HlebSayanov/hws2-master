@@ -36,7 +36,7 @@ function Clock() {
     }
 
 
-    let days = ['Monday ', 'Tuesday ', 'Wednesday ', 'Thursday ', 'Friday ', 'Saturday', 'Sunday '];
+    let days = ['Sunday ','Monday ', 'Tuesday ', 'Wednesday ', 'Thursday ', 'Friday ', 'Saturday'];
     let months = ["January ", "February ", "March ", "April ", "May ", "June ",
         "July ", "August ", "September ", "October ", "November ", "December "];
 
@@ -47,7 +47,7 @@ function Clock() {
     // день недели на английском, месяц на английском (https://learn.javascript.ru/intl#intl-datetimeformat)
     const stringDay = days[date.getDay()] || <br/> // пишут студенты
     const stringMonth = months[date.getMonth()] || <br/> // пишут студенты
-
+    console.log(days[date.getDay()])
     return (
         <div className={s.clock}>
             <div
