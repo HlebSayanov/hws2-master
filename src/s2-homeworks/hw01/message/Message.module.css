@@ -12,9 +12,12 @@
     display: flex;
     flex-direction: row-reverse;
     align-items: self-end;
+    margin-left: 70px;
 }
 
 .imageAndText img {
+    margin-top: 36px;
+    margin-left: 70px;
     width: 48px;
     height: 48px;
     margin-left: 25px;
