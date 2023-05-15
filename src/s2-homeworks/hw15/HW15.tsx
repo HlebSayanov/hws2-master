@@ -5,6 +5,7 @@ import axios from 'axios'
 import SuperPagination from './common/c9-SuperPagination/SuperPagination'
 import {useSearchParams} from 'react-router-dom'
 import SuperSort from './common/c10-SuperSort/SuperSort'
+import {log} from "util";
 
 /*
 * 1 - дописать SuperPagination
@@ -28,9 +29,10 @@ type ParamsType = {
 }
 
 const getTechs = (params: ParamsType) => {
+    debugger
     return axios
         .get<{ techs: TechType[], totalCount: number }>(
-            'https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test3',
+            'https://samurai.it-incubator.io/api/3.0/homework/test3',
             {params}
         )
         .catch((e) => {
@@ -52,33 +54,41 @@ const HW15 = () => {
         getTechs(params)
             .then((res) => {
                 // делает студент
+                if(res){
+                    setTechs(res.data.techs)
+                    setTotalCount(res.data.totalCount)
 
+                }
                 // сохранить пришедшие данные
-
+                // setSearchParams(params)
+                setLoading(false)
                 //
             })
     }
 
     const onChangePagination = (newPage: number, newCount: number) => {
         // делает студент
+        setPage(newPage)
+         setCount(newCount)
+        let obj = {page: newPage, count: newCount}
+         sendQuery(obj)
 
-        // setPage(
-        // setCount(
-
-        // sendQuery(
-        // setSearchParams(
+          setSearchParams({page: newPage+'', count: newCount.toString()})
 
         //
     }
 
     const onChangeSort = (newSort: string) => {
+
         // делает студент
+        console.log(newSort)
+        setSort(newSort)
 
-        // setSort(
-        // setPage(1) // при сортировке сбрасывать на 1 страницу
+        setPage(1) // при сортировке сбрасывать на 1 страницу
 
-        // sendQuery(
-        // setSearchParams(
+         sendQuery({sort: newSort,page: page, count: count})
+        // setSearchParams(new URLSearchParams({sort: newSort, page: page.toString(), count: count.toString()}))
+setSearchParams({sort: newSort})
 
         //
     }
@@ -106,10 +116,11 @@ const HW15 = () => {
         <div id={'hw15'}>
             <div className={s2.hwTitle}>Homework #15</div>
 
-            <div className={s2.hw}>
+            <div className={s2.hw} style={{marginTop: '40px'}}>
                 {idLoading && <div id={'hw15-loading'} className={s.loading}>Loading...</div>}
 
                 <SuperPagination
+
                     page={page}
                     itemsCountForPage={count}
                     totalCount={totalCount}
